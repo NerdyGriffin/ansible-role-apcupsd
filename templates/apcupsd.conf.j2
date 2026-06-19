@@ -1,0 +1,38 @@
+## apcupsd.conf — managed by Ansible (nerdygriffin.apcupsd); manual edits will be overwritten.
+##
+## apcupsd configuration. See apcupsd.conf(5) for the full directive reference.
+
+UPSNAME {{ apcupsd_upsname }}
+UPSCABLE {{ apcupsd_upscable }}
+UPSTYPE {{ apcupsd_upstype }}
+DEVICE {{ apcupsd_device }}
+POLLTIME {{ apcupsd_polltime }}
+
+LOCKFILE /var/lock
+SCRIPTDIR /etc/apcupsd
+PWRFAILDIR /etc/apcupsd
+NOLOGINDIR /etc
+
+ONBATTERYDELAY {{ apcupsd_onbatterydelay }}
+BATTERYLEVEL {{ apcupsd_batterylevel }}
+MINUTES {{ apcupsd_minutes }}
+TIMEOUT {{ apcupsd_timeout }}
+ANNOY {{ apcupsd_annoy }}
+ANNOYDELAY {{ apcupsd_annoydelay }}
+NOLOGON {{ apcupsd_nologon }}
+KILLDELAY {{ apcupsd_killdelay }}
+
+NETSERVER {{ 'on' if apcupsd_netserver | bool else 'off' }}
+NISIP {{ apcupsd_nisip }}
+NISPORT {{ apcupsd_nisport }}
+
+EVENTSFILE {{ apcupsd_eventsfile }}
+EVENTSFILEMAX {{ apcupsd_eventsfilemax }}
+
+UPSCLASS {{ apcupsd_upsclass }}
+UPSMODE {{ apcupsd_upsmode }}
+
+STATTIME {{ apcupsd_stattime }}
+STATFILE {{ apcupsd_statfile }}
+LOGSTATS {{ 'on' if apcupsd_logstats | bool else 'off' }}
+DATATIME {{ apcupsd_datatime }}

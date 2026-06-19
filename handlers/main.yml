@@ -1,0 +1,7 @@
+---
+# handlers file for nerdygriffin.apcupsd
+
+- name: Restart apcupsd
+  ansible.builtin.service:
+    name: "{{ apcupsd_service }}"
+    state: restarted

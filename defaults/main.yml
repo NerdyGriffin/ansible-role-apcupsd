@@ -1,0 +1,70 @@
+---
+# defaults file for nerdygriffin.apcupsd
+#
+# apcupsd monitors an APC UPS and orchestrates a graceful shutdown on a
+# prolonged power failure. The defaults below describe a self-contained USB
+# install; override the device-connection vars for a network (PCNET/SNMP) or
+# NIS netslave topology. See README.md for the directive reference.
+
+# Packages and service ------------------------------------------------------
+apcupsd_packages:
+  - apcupsd
+apcupsd_service: apcupsd
+apcupsd_service_enabled: true
+apcupsd_service_state: started
+
+# Path to the rendered master config.
+apcupsd_config_file: /etc/apcupsd/apcupsd.conf
+
+# Device connection ---------------------------------------------------------
+# Identifies the UPS in logs/apcaccess (<= 8 chars, does not write EEPROM).
+apcupsd_upsname: ups
+
+# Cable type: simple, smart, ether, usb, or a specific 940-xxxx model number.
+apcupsd_upscable: usb
+
+# Driver: usb, apcsmart, net, snmp, dumb, pcnet, modbus, test.
+apcupsd_upstype: usb
+
+# Port/address for the driver. Leave blank for USB. For pcnet/snmp this is the
+# management card endpoint (e.g. "10.9.20.5:device:<passphrase>"); for a net
+# (NIS) slave it is "<master-host>:3551".
+apcupsd_device: ""
+
+# Seconds between polls of the UPS (network drivers benefit from a value).
+apcupsd_polltime: 60
+
+# Shutdown behaviour --------------------------------------------------------
+# Grace period (s) on battery before reacting (debounces brief sags).
+apcupsd_onbatterydelay: 6
+# Begin shutdown when the battery drops to this charge percentage.
+apcupsd_batterylevel: 5
+# ...or when this many runtime minutes remain.
+apcupsd_minutes: 3
+# ...or after this many seconds on battery (0 = disabled).
+apcupsd_timeout: 0
+# Re-warn logged-in users every ANNOY seconds, starting ANNOYDELAY in.
+apcupsd_annoy: 300
+apcupsd_annoydelay: 60
+# Disallow new logins (disable | timeout | percent | minutes).
+apcupsd_nologon: disable
+# Delay (s) between "kill power" and apcupsd halting itself (0 = off).
+apcupsd_killdelay: 0
+
+# NIS network server --------------------------------------------------------
+# Serve status for apcaccess / netslaves. Loopback-only by default.
+apcupsd_netserver: true
+apcupsd_nisip: 127.0.0.1
+apcupsd_nisport: 3551
+
+# Logging -------------------------------------------------------------------
+apcupsd_eventsfile: /var/log/apcupsd.events
+apcupsd_eventsfilemax: 10
+# UPSCLASS: standalone | shareslave | sharemaster.
+apcupsd_upsclass: standalone
+# UPSMODE: disable (standalone) | share (NIS slave/master).
+apcupsd_upsmode: disable
+apcupsd_stattime: 0
+apcupsd_statfile: /var/log/apcupsd.status
+apcupsd_logstats: false
+apcupsd_datatime: 0
