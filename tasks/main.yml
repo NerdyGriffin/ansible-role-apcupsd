@@ -23,7 +23,7 @@
     path: /etc/default/apcupsd
     regexp: ^ISCONFIGURED=
     line: ISCONFIGURED=yes
-  when: ansible_os_family == "Debian"
+  when: ansible_facts["os_family"] == "Debian"
   notify: Restart apcupsd
 
 - name: Enable and start apcupsd
