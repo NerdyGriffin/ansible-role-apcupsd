@@ -8,3 +8,5 @@ rules:
 
 ignore: |
   .github/workflows/stale.yml
+  # Vendored subtree — see exclude_paths in .ansible-lint.
+  .ansible-lint-rules/
